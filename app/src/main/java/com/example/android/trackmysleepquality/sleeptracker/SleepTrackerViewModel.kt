@@ -45,6 +45,17 @@ class SleepTrackerViewModel(
     private val _showSnackbar = MutableLiveData<Boolean>()
     val showSnackbar: LiveData<Boolean> = _showSnackbar
 
+    // Buttons
+    val startButtonVisible = Transformations.map(tonight) {
+        null == it
+    }
+    val stopButtonVisible = Transformations.map(tonight) {
+        null != it
+    }
+    val clearButtonVisible = Transformations.map(nights) {
+        it.isNotEmpty()
+    }
+
     init {
         initializeTonight()
     }
@@ -91,6 +102,7 @@ class SleepTrackerViewModel(
 
         }
     }
+
     private suspend fun insert(night: SleepNight) {
         database.insert(night)
     }
