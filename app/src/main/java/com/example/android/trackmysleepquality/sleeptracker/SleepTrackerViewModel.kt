@@ -19,13 +19,44 @@ package com.example.android.trackmysleepquality.sleeptracker
 import android.app.Application
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * ViewModel for SleepTrackerFragment.
  */
 class SleepTrackerViewModel(
-        val database: SleepDatabaseDao,
-        application: Application) : AndroidViewModel(application) {
+    val database: SleepDatabaseDao,
+    application: Application
+) : AndroidViewModel(application) {
+    val nights = database.getAllNights()
+
+    private val _showSnackbar = MutableLiveData<Boolean>()
+    val showSnackbar: LiveData<Boolean> = _showSnackbar
+
+    init {
+
+    }
+
+    fun onClear() {
+        _showSnackbar.value = true
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                database.clear()
+            }
+        }
+    }
+
+    fun doneShowingSnackbar() {
+        _showSnackbar.value = false
+    }
+
+    fun onStartTracking() {}
+    fun onStopTracking() {}
+
 }
 

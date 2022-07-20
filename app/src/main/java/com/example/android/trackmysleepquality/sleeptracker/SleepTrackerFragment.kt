@@ -22,10 +22,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.android.trackmysleepquality.R
 import com.example.android.trackmysleepquality.database.SleepDatabase
 import com.example.android.trackmysleepquality.databinding.FragmentSleepTrackerBinding
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * A fragment with buttons to record start and end times for sleep, which are saved in
@@ -57,6 +59,19 @@ class SleepTrackerFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[SleepTrackerViewModel::class.java]
         binding.sleepTrackerViewModel = viewModel
         binding.lifecycleOwner = this
+
+
+        viewModel.showSnackbar.observe(viewLifecycleOwner, Observer { isCleared ->
+            if (isCleared) {
+                Snackbar.make(
+                    requireActivity().findViewById(android.R.id.content),
+                    getString(R.string.cleared_message),
+                    Snackbar.LENGTH_SHORT
+                )
+                    .show()
+                viewModel.doneShowingSnackbar()
+            }
+        })
 
         return binding.root
     }
