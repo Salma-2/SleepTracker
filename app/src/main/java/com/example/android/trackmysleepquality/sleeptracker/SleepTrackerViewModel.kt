@@ -32,12 +32,16 @@ class SleepTrackerViewModel(
     val database: SleepDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
-    val nights = database.getAllNights()
+    private val nights = database.getAllNights()
     val nightString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
 
     private val tonight = MutableLiveData<SleepNight?>()
+
+    private val _navigateToSleepQuality = MutableLiveData<SleepNight?>()
+    val navigateToSleepQuality: LiveData<SleepNight?> = _navigateToSleepQuality
+
     private val _showSnackbar = MutableLiveData<Boolean>()
     val showSnackbar: LiveData<Boolean> = _showSnackbar
 
@@ -87,7 +91,6 @@ class SleepTrackerViewModel(
 
         }
     }
-
     private suspend fun insert(night: SleepNight) {
         database.insert(night)
     }
@@ -99,7 +102,12 @@ class SleepTrackerViewModel(
             withContext(Dispatchers.IO) {
                 update(oldNight)
             }
+            _navigateToSleepQuality.value = oldNight
         }
+    }
+
+    fun doneNavigatingToSleepQuality() {
+        _navigateToSleepQuality.value = null
     }
 
     private suspend fun update(oldNight: SleepNight) {
