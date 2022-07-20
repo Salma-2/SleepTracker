@@ -32,7 +32,7 @@ class SleepQualityViewModel(
     private val _navigatingToTracking = MutableLiveData<Boolean>()
     val navigatingToTracking: LiveData<Boolean> = _navigatingToTracking
 
-    fun onChoosingSleepQuality(sleepQuality: Int) {
+    fun onSetSleepQuality(sleepQuality: Int) {
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
                 val night = sleepDatabaseDao.get(sleepNightKey) ?: return@withContext
