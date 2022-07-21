@@ -55,6 +55,11 @@ class SleepTrackerFragment : Fragment() {
         val binding: FragmentSleepTrackerBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_sleep_tracker, container, false
         )
+
+        val adapter = SleepNightAdapter()
+        binding.sleepList.adapter = adapter
+
+
         val application = requireNotNull(this.activity).application
         val dataSource = SleepDatabase.getInstance(application).sleepDatabaseDao
         viewModelFactory = SleepTrackerViewModelFactory(dataSource, application)
@@ -86,6 +91,9 @@ class SleepTrackerFragment : Fragment() {
             }
         })
 
+        viewModel.nights.observe(viewLifecycleOwner, Observer {
+            adapter.data = it
+        })
 
         return binding.root
     }
