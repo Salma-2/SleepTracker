@@ -17,6 +17,7 @@
 package com.example.android.trackmysleepquality.sleeptracker
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
@@ -33,7 +34,8 @@ class SleepTrackerViewModel(
     application: Application
 ) : AndroidViewModel(application) {
     private val nights = database.getAllNights()
-    val nightString = Transformations.map(nights) { nights ->
+
+    val nightsString = Transformations.map(nights) { nights ->
         formatNights(nights, application.resources)
     }
 
