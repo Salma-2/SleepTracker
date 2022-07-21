@@ -20,4 +20,4 @@ The SleepTracker app is a demo app that helps you collect information about your
 <img src="https://user-images.githubusercontent.com/48512714/180123001-a0bfef66-8294-4b6e-852f-306a7b86f559.png" width ="200">
 </p>
 
-This app is part of Advanced Android Kotlin Development Nanodegree Program on Udacity
+*This app is part of Advanced Android Kotlin Development Nanodegree Program on Udacity*
