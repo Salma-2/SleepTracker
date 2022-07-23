@@ -24,11 +24,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:sleepImage="@{sleepNight}"
             app:srcCompat="@drawable/ic_launcher_sleep_tracker_foreground"
             tools:src="@drawable/ic_sleep_5" />
 
         <TextView
             android:id="@+id/sleep_length"
+            sleepDurationFormatted="@{sleepNight}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -38,6 +40,7 @@
 
         <TextView
             android:id="@+id/sleep_quality"
+            sleepQualityString="@{sleepNight}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
