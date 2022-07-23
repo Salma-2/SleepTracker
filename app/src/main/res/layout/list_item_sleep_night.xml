@@ -28,26 +28,16 @@
             app:srcCompat="@drawable/ic_launcher_sleep_tracker_foreground"
             tools:src="@drawable/ic_sleep_5" />
 
-        <TextView
-            android:id="@+id/sleep_length"
-            sleepDurationFormatted="@{sleepNight}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/sleep_quality"
-            app:layout_constraintTop_toTopOf="@+id/img_quality"
-            tools:text="Monday" />
 
         <TextView
             android:id="@+id/sleep_quality"
             sleepQualityString="@{sleepNight}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_quality"
-            app:layout_constraintTop_toBottomOf="@+id/sleep_length"
+            app:layout_constraintEnd_toEndOf="@+id/img_quality"
+            app:layout_constraintStart_toStartOf="@+id/img_quality"
+            app:layout_constraintTop_toBottomOf="@+id/img_quality"
             tools:text="Excellent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
