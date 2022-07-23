@@ -68,6 +68,7 @@ class SleepTrackerFragment : Fragment() {
         binding.lifecycleOwner = this
 
 
+
         viewModel.showSnackbar.observe(viewLifecycleOwner, Observer { isCleared ->
             if (isCleared) {
                 Snackbar.make(
