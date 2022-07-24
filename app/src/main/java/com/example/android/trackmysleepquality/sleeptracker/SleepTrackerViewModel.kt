@@ -45,6 +45,10 @@ class SleepTrackerViewModel(
     private val _navigateToSleepQuality = MutableLiveData<SleepNight?>()
     val navigateToSleepQuality: LiveData<SleepNight?> = _navigateToSleepQuality
 
+    private val _navigateToSleepDetail = MutableLiveData<Long?>()
+
+    val navigateToSleepDetail: LiveData<Long?> = _navigateToSleepDetail
+
     private val _showSnackbar = MutableLiveData<Boolean>()
     val showSnackbar: LiveData<Boolean> = _showSnackbar
 
@@ -127,6 +131,16 @@ class SleepTrackerViewModel(
 
     private suspend fun update(oldNight: SleepNight) {
         database.update(oldNight)
+    }
+
+
+    fun onSleepNightClicked(id: Long) {
+        _navigateToSleepDetail.value = id
+    }
+
+    fun doneNavigatingToSleepDetail() {
+        _navigateToSleepDetail.value = null
+
     }
 
 }
