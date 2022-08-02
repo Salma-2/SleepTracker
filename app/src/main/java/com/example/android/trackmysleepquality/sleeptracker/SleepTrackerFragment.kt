@@ -122,8 +122,8 @@ class SleepTrackerFragment : Fragment() {
                         it
                     )
                 )
+                viewModel.doneNavigatingToSleepDetail()
             }
-            viewModel.doneNavigatingToSleepDetail()
         })
 
         return binding.root
